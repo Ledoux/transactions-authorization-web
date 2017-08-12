@@ -16,10 +16,9 @@
     "classnames": "2.2.5",
     "transactions-interface-state": "latest",
     "transactions-interface-web": "latest",
-    "transactions-redux-normalizer": "latest",
-    "transactions-redux-reselector": "latest",
     "prop-types": "^15.5.4",
-    "react": "15.5.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-redux": "^5.0.5"
   },
   "description": "In the framework of transactions, this is a frontend plugin that gives you very uis for modes",
@@ -44,5 +43,5 @@
     "dev-watch-js": "nodemon --watch src --ignore src/styles --exec \"npm run compile\"",
     "dev-watch": "concurrently \"npm run dev-watch-js\" \"npm run dev-watch-sass\""
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
