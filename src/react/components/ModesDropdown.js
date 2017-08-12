@@ -3,8 +3,6 @@ const { getLocationSearch,
   getLocationSearchString
 } = require('transactions-interface-state').default
 
-import ModeItem from '../items/ModeItem'
-
 const ModesDropdown = ({ history,
   modes
 }) => {

@@ -3,9 +3,9 @@ import React from 'react'
 const { getLocationSearch,
   getLocationSearchString
 } = require('transactions-interface-state').default
-
-import Button from '../components/Button'
-import Icon from '../components/Icon'
+const { Button,
+  Icon
+} = require('transactions-interface-web').default
 
 const ModeItem = ({ handleMouseEnter,
   handleMouseExit,

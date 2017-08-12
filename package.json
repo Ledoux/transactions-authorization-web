@@ -18,7 +18,6 @@
     "transactions-interface-web": "latest",
     "transactions-redux-normalizer": "latest",
     "transactions-redux-reselector": "latest",
-    "pluralize": "^3.0.0",
     "prop-types": "^15.5.4",
     "react": "15.5.4",
     "react-redux": "^5.0.5"

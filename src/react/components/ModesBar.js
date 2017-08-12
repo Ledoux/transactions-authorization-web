@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ModeItem from '../items/ModeItem'
+import Mode from './Mode'
 
 class ModesBar extends Component {
   render () {
@@ -25,7 +25,7 @@ class ModesBar extends Component {
             className='modes-bar__item'
             key={index}
           >
-            <ModeItem
+            <Mode
               history={history}
               isFirst={isFirst}
               isLast={isLast}

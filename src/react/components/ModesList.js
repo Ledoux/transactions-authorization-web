@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import ModeItem from './ModeItem'
+import Mode from './Mode'
 
 class ModesList extends Component {
   constructor () {
@@ -41,7 +41,7 @@ class ModesList extends Component {
                 className='modes-list__box__options__item'
                 key={index}
               >
-                <ModeItem
+                <Mode
                   handleMouseEnter={handleMouseEnter}
                   handleMouseExit={handleMouseExit}
                   index={index} {...visibleMode}
