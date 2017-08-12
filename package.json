@@ -1,0 +1,49 @@
+{
+  "ava": {
+    "babel": {
+      "presets": [
+        "latest",
+        "react"
+      ]
+    },
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
+  },
+  "author": "Erwan Ledoux",
+  "dependencies": {
+    "classnames": "2.2.5",
+    "transactions-interface-state": "latest",
+    "transactions-interface-web": "latest",
+    "transactions-redux-normalizer": "latest",
+    "transactions-redux-reselector": "latest",
+    "pluralize": "^3.0.0",
+    "prop-types": "^15.5.4",
+    "react": "15.5.4",
+    "react-redux": "^5.0.5"
+  },
+  "description": "In the framework of transactions, this is a frontend plugin that gives you very uis for modes",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.22.0",
+    "concurrently": "^3.1.0",
+    "nodemon": "^1.11.0",
+    "node-sass": "^4.5.3",
+    "standard": "^7.0.1"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "transactions-modes-web",
+  "scripts": {
+    "compile": "babel --presets latest,react -d lib/ src/",
+    "test": "ava -v",
+    "dev": "npm run dev",
+    "dev-watch-sass": "node-sass -w src/styles -o lib/styles src/styles/index.scss",
+    "dev-watch-js": "nodemon --watch src --ignore src/styles --exec \"npm run compile\"",
+    "dev-watch": "concurrently \"npm run dev-watch-js\" \"npm run dev-watch-sass\""
+  },
+  "version": "0.0.1"
+}

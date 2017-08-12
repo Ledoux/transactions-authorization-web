@@ -1,0 +1,19 @@
+.modes-bar {
+  padding-bottom: 1.7rem;
+  position: relative;
+  @media (min-width: $md) {
+    margin-left: 30%;
+    width: 20rem;
+  }
+  &__slider {
+    border-bottom: 2px solid $medium-blue;
+    bottom: 0;
+    height: 0.5rem;
+    position: absolute;
+    transition: left 0.4s;
+    width: 4rem;
+  }
+  &__item {
+    margin-right: 0.75rem;
+  }
+}

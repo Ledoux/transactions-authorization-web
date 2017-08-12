@@ -1,0 +1,7 @@
+.page {
+  border-color: black;
+  font-family: $font-family;
+  min-height: 100vh;
+  padding-top: $header-height;
+  z-index: -1;
+}

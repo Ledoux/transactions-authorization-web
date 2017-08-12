@@ -1,0 +1,35 @@
+.dashboard-page {
+  font-family: $font-family;
+  text-align: center;
+  padding-top: 5.5rem;
+  &__modes {
+    margin-top: -4rem;
+    left: 16%;
+    right: 20%;
+    position: fixed;
+    z-index: 2000;
+    @media (min-width: $md) {
+      left: 30%;
+      margin-top: -3.55rem;
+      width: 18rem;
+    }
+    &__bar {
+      @media (max-width: $md) {
+        display: none;
+      }
+    }
+    &__dropdown {
+      @media (min-width: $md) {
+        display: none;
+      }
+    }
+  }
+  &__content {
+    padding-top: 1rem;
+    &__dashboard {
+      &--hidden {
+        display: none;
+      }
+    }
+  }
+}
