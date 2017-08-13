@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "main": "lib/index.js",
-  "name": "transactions-modes-web",
+  "name": "transactions-authorization-web",
   "scripts": {
     "compile": "babel --presets latest,react -d lib/ src/",
     "test": "ava -v",
