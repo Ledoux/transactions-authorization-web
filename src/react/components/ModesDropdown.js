@@ -1,7 +1,7 @@
 import React from 'react'
-const { getLocationSearch,
+import { getLocationSearch,
   getLocationSearchString
-} = require('transactions-interface-state').default
+} from 'transactions-interface-state'
 
 const ModesDropdown = ({ history,
   modes

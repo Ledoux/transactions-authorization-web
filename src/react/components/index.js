@@ -3,9 +3,8 @@ import ModesBar from './ModesBar'
 import ModesDropdown from './ModesDropdown'
 import ModesList from './ModesList'
 
-const ComponentsByComponentName = { Mode,
+export { Mode,
   ModesBar,
   ModesDropdown,
   ModesList
 }
-export default ComponentsByComponentName

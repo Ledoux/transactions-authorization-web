@@ -1,11 +1,12 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-const { getLocationSearch,
+import { getLocationSearch,
   getLocationSearchString,
-  setAuthorizationSelectedMode,
+  getTransactionsProps,
   showModalHome
-} = require('transactions-interface-state').default
+} from 'transactions-interface-state'
+import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
 
 import ModesBar from '../components/ModesBar'
 import ModesDropdown from '../components/ModesDropdown'
@@ -46,6 +47,8 @@ class DashboardPage extends Component {
         if (nextSelectedMode) {
           setAuthorizationSelectedMode(nextSelectedMode)
         }
+      } else if (!selectedMode && modes && modes[0]) {
+        setAuthorizationSelectedMode(modes[0])
       }
     }
   }
@@ -66,6 +69,7 @@ class DashboardPage extends Component {
       modes,
       selectedMode
     } = this.props
+    const transactionsProps = getTransactionsProps(this.props)
     const visibleModes = (modeNames && modes && modes.filter(({ name }) =>
       modeNames.includes(name))) || (allModes && allModes.filter(({name}) =>
         !excludedModeNames.includes(name)))
@@ -94,15 +98,15 @@ class DashboardPage extends Component {
       </div>
       <div className='dashboard-page__content'>
         {
-          visibleModes && visibleModes.map(({homeName, name}, index) => {
+          visibleModes && visibleModes.map(({ name }, index) => {
             const DashboardComponent = dashboardViewer && dashboardViewer[name]
-            const isHidden = homeName !== (selectedMode && selectedMode.name)
+            const isHidden = name !== (selectedMode && selectedMode.name)
             return (DashboardComponent && <div
             className={classnames('dashboard-page__content__dashboard', {
               'dashboard-page__content__dashboard--hidden': isHidden
             })}
             key={index}>
-              <DashboardComponent />
+              <DashboardComponent {...transactionsProps} />
             </div>)
           })
         }
@@ -116,8 +120,7 @@ DashboardPage.defaultProps = {
   pathName: '/dashboard'
 }
 
-function mapStateToProps ({
-  authorization: { allModes,
+function mapStateToProps ({ authorization: { allModes,
     modes,
     selectedMode
   },

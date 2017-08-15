@@ -1,11 +1,11 @@
 import classnames from 'classnames'
 import React from 'react'
-const { getLocationSearch,
+import { getLocationSearch,
   getLocationSearchString
-} = require('transactions-interface-state').default
-const { Button,
+} from 'transactions-interface-state'
+import { Button,
   Icon
-} = require('transactions-interface-web').default
+} from 'transactions-interface-web'
 
 const ModeItem = ({ handleMouseEnter,
   handleMouseExit,
