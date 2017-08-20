@@ -14,17 +14,20 @@ import ModesDropdown from '../components/ModesDropdown'
 class DashboardPage extends Component {
   constructor () {
     super ()
+    this.state = { visibleModes: [] }
     this.handleBackHome = this._handleBackHome.bind(this)
+    this.handleSetVisibleModes = this._handleSetVisibleModes.bind(this)
   }
   _handleBackHome (prevProps) {
-    const { history,
+    const { availableModes,
+      history,
       modalViewer,
-      modes,
       pathName,
       selectedMode,
       setAuthorizationSelectedMode,
       showModalHome
     } = this.props
+    const { visibleModes } = this.state
     // special modals when go back home
     if (window.location.pathname === pathName) {
       const search = getLocationSearch(window.location.search)
@@ -42,15 +45,33 @@ class DashboardPage extends Component {
           search: nextSearch
         })
       } else if (search && search.selectedModeName && !selectedMode) {
-        const nextSelectedMode = modes && modes.find(({name}) =>
+        const nextSelectedMode = availableModes && availableModes.find(({name}) =>
           name === search.selectedModeName)
         if (nextSelectedMode) {
           setAuthorizationSelectedMode(nextSelectedMode)
         }
-      } else if (!selectedMode && modes && modes[0]) {
-        setAuthorizationSelectedMode(modes[0])
+      } else if (!selectedMode && visibleModes[0]) {
+        setAuthorizationSelectedMode(visibleModes[0])
       }
     }
+  }
+  _handleSetVisibleModes (props) {
+    const { availableModes,
+      modeNames,
+      excludedModeNames
+    } = props
+    const visibleModes = (modeNames && availableModes && availableModes.filter(({ name }) =>
+      modeNames.includes(name))) || (availableModes && availableModes.filter(({name}) =>
+        !excludedModeNames.includes(name)))
+    if (visibleModes) {
+      this.setState({ visibleModes })
+    }
+  }
+  componentWillMount () {
+    this.handleSetVisibleModes(this.props)
+  }
+  componentWillReceiveProps (nextProps) {
+    this.handleSetVisibleModes(nextProps)
   }
   componentDidMount () {
     this.handleBackHome()
@@ -59,20 +80,14 @@ class DashboardPage extends Component {
     this.handleBackHome(prevProps)
   }
   render () {
-    const { allModes,
-      dashboardViewer,
-      excludedModeNames,
-      firstName,
+    const { dashboardViewer,
       DefaultDashboardComponent,
+      firstName,
       history,
-      modeNames,
-      modes,
       selectedMode
     } = this.props
+    const { visibleModes } = this.state
     const transactionsProps = getTransactionsProps(this.props)
-    const visibleModes = (modeNames && modes && modes.filter(({ name }) =>
-      modeNames.includes(name))) || (allModes && allModes.filter(({name}) =>
-        !excludedModeNames.includes(name)))
     return (<main className='page dashboard-page main'>
       <div className='dashboard-page__modes'>
         <div className='dashboard-page__modes__bar'>
@@ -116,12 +131,11 @@ class DashboardPage extends Component {
 }
 
 DashboardPage.defaultProps = {
-  excludedModeNames: ['guest', 'user'],
+  excludedModeNames: ['guest', 'user', 'active'],
   pathName: '/dashboard'
 }
 
-function mapStateToProps ({ authorization: { allModes,
-    modes,
+function mapStateToProps ({ authorization: { availableModes,
     selectedMode
   },
   dashboardViewer,
@@ -130,11 +144,10 @@ function mapStateToProps ({ authorization: { allModes,
     firstName
   }
 }) {
-  return { allModes,
+  return { availableModes,
     dashboardViewer,
     firstName,
     modalViewer,
-    modes,
     selectedMode
   }
 }
