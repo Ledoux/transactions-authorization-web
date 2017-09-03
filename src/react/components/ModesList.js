@@ -63,8 +63,7 @@ class ModesList extends Component {
   }
 }
 
-function mapStateToProps ({
-  authorization: {
+function mapStateToProps ({ authorization: {
     modes
   }, mode}) {
   const specialModes = (modes && modes.filter(mode => mode.name !== 'guest')) || []
