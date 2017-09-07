@@ -1,11 +1,10 @@
 import React from 'react'
+import { push } from 'react-router-redux'
 import { getLocationSearch,
   getLocationSearchString
 } from 'transactions-interface-state'
 
-const ModesDropdown = ({ history,
-  modes
-}) => {
+const ModesDropdown = ({ modes }) => {
   const lastItemIndex = modes && (modes.length - 1)
   const search = getLocationSearch(window.location.search)
   return (<select
@@ -15,7 +14,7 @@ const ModesDropdown = ({ history,
       const homeName = event.target.value
       const nextSearch = getLocationSearchString(
         Object.assign(search, {selectedHomeName: homeName }))
-      history.push({
+      push({
         search: nextSearch
       })
     }}

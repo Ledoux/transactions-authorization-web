@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { getLocationSearch,
   getLocationSearchString,
-  getTransactionsProps,
   showModalHome
 } from 'transactions-interface-state'
 import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
@@ -18,9 +18,9 @@ class DashboardPage extends Component {
   }
   _handleBackHome (prevProps) {
     const { availableModes,
-      history,
       modalViewer,
       pathName,
+      push,
       selectedMode,
       setAuthorizationSelectedMode,
       showModalHome,
@@ -39,9 +39,7 @@ class DashboardPage extends Component {
         !search.selectedModeName)) {
         const nextSearch = getLocationSearchString(
           Object.assign({}, search, { selectedModeName: selectedMode.name }))
-        history.push({
-          search: nextSearch
-        })
+        push({ search: nextSearch })
       } else if (search && search.selectedModeName) {
         const nextSelectedMode = availableModes && availableModes.find(({name}) =>
           name === search.selectedModeName)
@@ -50,11 +48,9 @@ class DashboardPage extends Component {
         } else if (visibleModes && visibleModes[0]) {
           const nextSearch = getLocationSearchString(
             Object.assign({}, search, { selectedModeName: visibleModes[0].name }))
-          history.push({
-            search: nextSearch
-          })
+          push({ search: nextSearch })
         }
-      } else if (!selectedMode && visibleModes[0]) {
+      } else if (!selectedMode && visibleModes && visibleModes[0]) {
         setAuthorizationSelectedMode(visibleModes[0])
       }
     }
@@ -66,53 +62,52 @@ class DashboardPage extends Component {
     this.handleBackHome(prevProps)
   }
   render () {
-    const { dashboardViewer,
+    const { api,
+      dashboardViewer,
       DefaultDashboardComponent,
       firstName,
-      history,
       selectedMode,
       visibleModes
     } = this.props
-    const transactionsProps = getTransactionsProps(this.props)
-    return (<main className='page dashboard-page main'>
-      <div className='dashboard-page__modes'>
-        <div className='dashboard-page__modes__bar'>
+    return (
+      <main className='page dashboard-page main'>
+        <div className='dashboard-page__modes'>
+          <div className='dashboard-page__modes__bar'>
+            {
+              (visibleModes && visibleModes.length > 1) &&
+              <ModesBar modes={visibleModes}
+                selectedMode={selectedMode}
+              />
+            }
+          </div>
+          <div className='dashboard-page__modes__dropdown'>
+            {
+              (visibleModes && visibleModes.length > 1) &&
+              <ModesDropdown modes={visibleModes}
+                selectedMode={selectedMode}
+              />
+            }
+          </div>
+        </div>
+        <div className='dashboard-page__content'>
           {
-            (visibleModes && visibleModes.length > 1) &&
-            <ModesBar
-              history={history}
-              modes={visibleModes}
-              selectedMode={selectedMode}
-            />
+            visibleModes && visibleModes.map(({ name }, index) => {
+              const DashboardComponent = dashboardViewer && dashboardViewer[name]
+              const isHidden = name !== (selectedMode && selectedMode.name)
+              return DashboardComponent && (
+                <div className={classnames('dashboard-page__content__dashboard', {
+                  'dashboard-page__content__dashboard--hidden': isHidden
+                })}
+                  key={index}
+                >
+                  <DashboardComponent api={api} />
+                </div>
+              )
+            })
           }
         </div>
-        <div className='dashboard-page__modes__dropdown'>
-          {
-            (visibleModes && visibleModes.length > 1) &&
-            <ModesDropdown
-              history={history}
-              modes={visibleModes}
-              selectedMode={selectedMode}
-            />
-          }
-        </div>
-      </div>
-      <div className='dashboard-page__content'>
-        {
-          visibleModes && visibleModes.map(({ name }, index) => {
-            const DashboardComponent = dashboardViewer && dashboardViewer[name]
-            const isHidden = name !== (selectedMode && selectedMode.name)
-            return (DashboardComponent && <div
-            className={classnames('dashboard-page__content__dashboard', {
-              'dashboard-page__content__dashboard--hidden': isHidden
-            })}
-            key={index}>
-              <DashboardComponent {...transactionsProps} />
-            </div>)
-          })
-        }
-      </div>
-    </main>)
+      </main>
+    )
   }
 }
 
@@ -127,9 +122,7 @@ function mapStateToProps ({ authorization: { availableModes,
   },
   dashboardViewer,
   modalViewer,
-  user: {
-    firstName
-  }
+  user: { firstName }
 }) {
   return { availableModes,
     dashboardViewer,
@@ -140,5 +133,6 @@ function mapStateToProps ({ authorization: { availableModes,
   }
 }
 export default connect(mapStateToProps, { setAuthorizationSelectedMode,
-  showModalHome
+  showModalHome,
+  push
 })(DashboardPage)

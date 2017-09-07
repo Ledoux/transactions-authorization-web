@@ -4,8 +4,7 @@ import Mode from './Mode'
 
 class ModesBar extends Component {
   render () {
-    const { history,
-      modes,
+    const { modes,
       selectedMode
     } = this.props
     const lastItemIndex = modes && (modes.length - 1)
@@ -25,9 +24,7 @@ class ModesBar extends Component {
             className='modes-bar__item'
             key={index}
           >
-            <Mode
-              history={history}
-              isFirst={isFirst}
+            <Mode isFirst={isFirst}
               isLast={isLast}
               isSelected={selectedIndex === index}
               {...mode}

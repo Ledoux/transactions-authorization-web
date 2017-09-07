@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
+import { push } from 'react-router-redux'
 import { getLocationSearch,
   getLocationSearchString
 } from 'transactions-interface-state'
@@ -9,7 +10,6 @@ import { Button,
 
 const ModeItem = ({ handleMouseEnter,
   handleMouseExit,
-  history,
   icon,
   index,
   isFirst,
@@ -40,7 +40,7 @@ const ModeItem = ({ handleMouseEnter,
         const search = getLocationSearch(window.location.search)
         const nextSearch = getLocationSearchString(
           Object.assign(search, {selectedModeName: name }))
-        history.push({
+        push({
           search: nextSearch
         })
       }}
