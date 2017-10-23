@@ -14,13 +14,13 @@
   "author": "Erwan Ledoux",
   "dependencies": {
     "classnames": "2.2.5",
+    "prop-types": "^15.5.4",
+    "react": "^16.0.0",
+    "react-redux": "^5.0.5",
+    "react-router-redux": "next",
     "transactions-interface-state": "latest",
     "transactions-interface-web": "latest",
-    "prop-types": "^15.5.4",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.5",
-    "react-router-redux": "next"
+    "transactions-user-web": "latest"
   },
   "description": "In the framework of transactions, this is a frontend plugin that gives you very uis for modes",
   "devDependencies": {
@@ -44,5 +44,5 @@
     "dev-watch-js": "nodemon --watch src --exec \"npm run compile\"",
     "dev-watch": "concurrently \"npm run dev-watch-js\" \"npm run dev-watch-sass\""
   },
-  "version": "0.0.8"
+  "version": "0.0.9"
 }
