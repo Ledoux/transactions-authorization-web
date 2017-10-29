@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import { DashboardPage as withState } from 'transactions-authorization-state'
+import { Button } from 'transactions-interface-web'
 
 import ModesBar from '../components/ModesBar'
 import ModesDropdown from '../components/ModesDropdown'
@@ -11,11 +12,21 @@ const DashboardPage = ({ api,
   description,
   DefaultDashboardComponent,
   firstName,
+  onTutorialClick,
+  search,
   selectedMode,
   visibleModes
 }) => {
   return (
     <main className='page dashboard-page main'>
+      {
+        selectedMode && search.tutorialName !== selectedMode.name && (
+          <Button className='button button--alive dashboard-page__button'
+          onClick={onTutorialClick} >
+            Tutorial
+          </Button>
+        )
+      }
       <div className='dashboard-page__modes'>
         <div className='dashboard-page__modes__bar'>
           {
@@ -28,8 +39,7 @@ const DashboardPage = ({ api,
           {
             (visibleModes && visibleModes.length > 1) &&
             <ModesDropdown modes={visibleModes}
-              selectedMode={selectedMode}
-            />
+              selectedMode={selectedMode} />
           }
         </div>
       </div>

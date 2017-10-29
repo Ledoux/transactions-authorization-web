@@ -2,6 +2,12 @@
   font-family: $font-family;
   text-align: center;
   padding-top: 5.5rem;
+  &__button {
+    position: fixed;
+    top: 1.5rem;
+    left: 10rem;
+    z-index: 10000;
+  }
   &__modes {
     margin-top: -4rem;
     left: 16%;

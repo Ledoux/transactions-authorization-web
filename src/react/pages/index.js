@@ -1,11 +1,11 @@
-import { withProps } from 'transactions-interface-state'
+import { withForcedProps } from 'transactions-interface-state'
 import { SigninPage as _SigninPage,
   Signup as _SignupPage
 } from 'transactions-user-web'
 
 const returnToExtraProps = { returnTo: '/dashboard' }
-const SigninPage = withProps(returnToExtraProps)(_SigninPage)
-const SignupPage = withProps(returnToExtraProps)(_SignupPage)
+const SigninPage = withForcedProps(returnToExtraProps)(_SigninPage)
+const SignupPage = withForcedProps(returnToExtraProps)(_SignupPage)
 
 import DashboardPage from './DashboardPage'
 
