@@ -1,4 +1,4 @@
-import { withForcedProps } from 'transactions-interface-state'
+import { withForcedProps } from 'transactions-redux-react'
 import { SigninPage as _SigninPage,
   Signup as _SignupPage
 } from 'transactions-user-web'

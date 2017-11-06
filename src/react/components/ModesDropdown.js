@@ -17,8 +17,7 @@ const ModesDropdown = ({ modes }) => {
         push({
           search: nextSearch
         })
-      }}
-    >
+      }}>
       {
         modes && modes.map(({name}, index) => {
           const isFirst = index === 0
