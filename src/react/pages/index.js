@@ -1,6 +1,6 @@
 import { withForcedProps } from 'transactions-redux-react'
 import { SigninPage as _SigninPage,
-  Signup as _SignupPage
+  SignupPage as _SignupPage
 } from 'transactions-user-web'
 
 const returnToExtraProps = { returnTo: '/dashboard' }
