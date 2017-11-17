@@ -112,7 +112,7 @@
   text-align: center;
   padding-top: 5.5rem; }
   .dashboard-page__button {
-    position: fixed;
+    position: absolute;
     top: 1.5rem;
     left: 10rem;
     z-index: 10000; }

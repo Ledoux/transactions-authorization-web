@@ -2,7 +2,7 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import { getLocationSearch,
   getLocationSearchString
-} from 'transactions-interface-state'
+} from 'transactions-redux-react'
 
 const ModesDropdown = ({ modes }) => {
   const lastItemIndex = modes && (modes.length - 1)

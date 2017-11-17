@@ -18,6 +18,7 @@
     "react": "^16.0.0",
     "react-redux": "^5.0.5",
     "react-router-redux": "next",
+    "react-portal": "^4.0.0",
     "transactions-interface-state": "latest",
     "transactions-interface-web": "latest",
     "transactions-redux-react": "latest",

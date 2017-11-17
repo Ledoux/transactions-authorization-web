@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
+import { Portal } from 'react-portal'
 import { DashboardPage as withState } from 'transactions-authorization-state'
 import { Button } from 'transactions-interface-web'
 
@@ -21,10 +22,12 @@ const DashboardPage = ({ api,
     <main className='page dashboard-page main'>
       {
         selectedMode && search.tutorialName !== selectedMode.name && (
-          <Button className='button button--alive dashboard-page__button'
-          onClick={onTutorialClick} >
-            Tutorial
-          </Button>
+          <Portal node={document && document.querySelector('.header')} >
+            <Button className='button button--alive dashboard-page__button'
+            onClick={onTutorialClick} >
+              Tutorial
+            </Button>
+          </Portal>
         )
       }
       <div className='dashboard-page__modes'>
