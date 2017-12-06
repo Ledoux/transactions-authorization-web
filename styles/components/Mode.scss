@@ -4,7 +4,7 @@
     border-radius: 0;
     box-shadow: 0;
     border: 0;
-    color: $middle-font-color;
+    color: $dark-grey;
     cursor: pointer;
     &:focus {
       outline: none;
@@ -41,7 +41,7 @@
     }
     &__illustration {
       &__icon {
-        fill: $middle-font-color;
+        fill: $dark-grey;
         height: 1rem;
         width: 1rem;
         &--selected {
@@ -50,7 +50,7 @@
       }
     }
     &__content {
-      color: $middle-font-color;
+      color: $dark-grey;
       height: 100%;
       &--selected {
         color: $medium-blue;
