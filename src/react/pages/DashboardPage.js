@@ -18,11 +18,30 @@ const DashboardPage = ({ api,
   selectedMode,
   visibleModes
 }) => {
+  const portalElement = document && document.querySelector('.header__left')
   return (
     <main className='page dashboard-page main'>
+      <div className='dashboard-page__modes'>
+        <Portal node={portalElement} >
+          <div className='dashboard-page__modes__bar mr1'>
+            {
+              (visibleModes && visibleModes.length > 1) &&
+              <ModesBar modes={visibleModes}
+                selectedMode={selectedMode} />
+            }
+          </div>
+          <div className='dashboard-page__modes__dropdown'>
+            {
+              (visibleModes && visibleModes.length > 1) &&
+              <ModesDropdown modes={visibleModes}
+                selectedMode={selectedMode} />
+            }
+          </div>
+        </Portal>
+      </div>
       {
         selectedMode && search.tutorialName !== selectedMode.name && (
-          <Portal node={document && document.querySelector('.header')} >
+          <Portal node={portalElement} >
             <Button className='button button--alive dashboard-page__button'
             onClick={onTutorialClick} >
               Tutorial
@@ -30,28 +49,12 @@ const DashboardPage = ({ api,
           </Portal>
         )
       }
-      <div className='dashboard-page__modes'>
-        <div className='dashboard-page__modes__bar'>
-          {
-            (visibleModes && visibleModes.length > 1) &&
-            <ModesBar modes={visibleModes}
-              selectedMode={selectedMode} />
-          }
-        </div>
-        <div className='dashboard-page__modes__dropdown'>
-          {
-            (visibleModes && visibleModes.length > 1) &&
-            <ModesDropdown modes={visibleModes}
-              selectedMode={selectedMode} />
-          }
-        </div>
-      </div>
       <div className='dashboard-page__content'>
         {
           visibleModes && visibleModes.map(({ name }, index) => {
             const DashboardComponent = dashboardCategory && dashboardCategory[name]
             const isHidden = name !== (selectedMode && selectedMode.name)
-            return DashboardComponent && (
+            return !isHidden && DashboardComponent && (
               <div className={classnames('dashboard-page__content__dashboard', {
                 'dashboard-page__content__dashboard--hidden': isHidden
               })}

@@ -8,6 +8,7 @@ import { Button,
 const Mode = ({ icon,
   index,
   isFirst,
+  isIcon,
   isLast,
   isList,
   isMiddle,
@@ -20,8 +21,7 @@ const Mode = ({ icon,
   const label = name[0].toUpperCase() + name.slice(1)
   return (
     <div className='mode' >
-      <Button
-        className={classnames(`mode__button`, {
+      <Button className={classnames(`mode__button`, {
           'mode__button--first': isFirst,
           'mode__button--last': isLast,
           'mode__button--list': isList,
@@ -29,21 +29,24 @@ const Mode = ({ icon,
         })}
         onClick={onModeClick}
       >
-        <div className='mode__button__illustration col'>
-          <Icon
-            className={classnames(`icon mode__button__illustration__icon
-              mode__button__illustration__icon-${name}`, {
-                'mode__button__illustration__icon--selected': isSelected
-              })}
-            icon={icon}
-          />
-        </div>
+        {
+          isIcon && (
+            <div className='mode__button__illustration col'>
+              <Icon className={classnames(`icon mode__button__illustration__icon
+                  mode__button__illustration__icon-${name}`, {
+                    'mode__button__illustration__icon--selected': isSelected
+                  })}
+                icon={icon}
+              />
+            </div>
+          )
+        }
         <div className={classnames('mode__button__content col', {
           'mode__button__content--selected': isSelected
         })}>
-          <p className='mode__button__content__title'>
+          <div className='mode__button__content__title'>
             {label}
-          </p>
+          </div>
         </div>
       </Button>
     </div>

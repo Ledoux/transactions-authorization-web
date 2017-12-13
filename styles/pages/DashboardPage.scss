@@ -3,24 +3,11 @@
   text-align: center;
   padding-top: 5.5rem;
   &__button {
-    position: absolute;
-    top: 1.5rem;
-    left: 10rem;
-    z-index: 10000;
+    margin-right: 0.1rem;
   }
   &__modes {
-    margin-top: -4rem;
-    left: 16%;
-    right: 20%;
-    position: fixed;
-    z-index: 2000;
-    @media (min-width: $md) {
-      left: 30%;
-      margin-top: -3.55rem;
-      width: 18rem;
-    }
     &__bar {
-      @media (max-width: $md) {
+      @media (max-width: $sm) {
         display: none;
       }
     }

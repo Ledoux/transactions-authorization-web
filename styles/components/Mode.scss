@@ -4,11 +4,12 @@
     border-radius: 0;
     box-shadow: 0;
     border: 0;
-    color: $dark-grey;
+    color: $very-dark-grey;
     cursor: pointer;
     &:focus {
       outline: none;
     }
+    min-width: 4rem;
     &--list {
       height: 2rem;
       padding-left: 0.5rem;
@@ -45,7 +46,7 @@
         height: 1rem;
         width: 1rem;
         &--selected {
-          fill: $medium-blue;
+          fill: $identity-color;
         }
       }
     }
@@ -53,14 +54,14 @@
       color: $dark-grey;
       height: 100%;
       &--selected {
-        color: $medium-blue;
+        color: $identity-color;
       }
+      width: 100%;
       &__title {
         font-family: $font-family;
         font-weight: 500;
-        font-size: 12px;
+        font-size: 14px;
         padding-bottom: 0.2rem;
-        padding-left: 0.25rem;
         padding-top: 0.2rem;
       }
       display: none;

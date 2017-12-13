@@ -1,8 +1,9 @@
+import classnames from 'classnames'
 import React, { Component } from 'react'
 
 import Mode from './Mode'
 
-const ModesBar = ({
+const ModesBar = ({ isIcon,
   modes,
   selectedMode
 }) => {
@@ -13,8 +14,9 @@ const ModesBar = ({
     .indexOf(true))
   return (
     <div className='modes-bar flex'>
-      <div className='modes-bar__slider' style={{
-          left: `${selectedIndex * 4.25}rem`
+      <div className={classnames('modes-bar__slider', {
+        'modes-bar__slider--icon': isIcon })} style={{
+          left: `${selectedIndex * (isIcon ? 4 : 4)}rem`
         }}/>
       {
         modes && modes.map((mode, index) => {
@@ -24,6 +26,7 @@ const ModesBar = ({
             <div className='modes-bar__item'
               key={index} >
               <Mode isFirst={isFirst}
+                isIcon={isIcon}
                 isLast={isLast}
                 isSelected={selectedIndex === index}
                 {...mode}
