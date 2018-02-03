@@ -1,23 +1,16 @@
 import React from 'react'
-import { push } from 'react-router-redux'
-import { getLocationSearch,
-  getLocationSearchString
-} from 'transactions-redux-react'
+import { ModesDropdown as withState } from 'transactions-authorization-state'
 
-const ModesDropdown = ({ modes }) => {
+const ModesDropdown = ({
+  location: { query: { selectedModeName } },
+  modes,
+  onChange
+}) => {
   const lastItemIndex = modes && (modes.length - 1)
-  const search = getLocationSearch(window.location.search)
   return (
     <select className='modes-dropdown'
-      defaultValue={search.selectedModeName}
-      onChange={event => {
-        const homeName = event.target.value
-        const nextSearch = getLocationSearchString(
-          Object.assign(search, {selectedHomeName: homeName }))
-        push({
-          search: nextSearch
-        })
-      }}>
+      defaultValue={selectedModeName}
+      onChange={onChange}>
       {
         modes && modes.map(({name}, index) => {
           const isFirst = index === 0
@@ -36,4 +29,4 @@ const ModesDropdown = ({ modes }) => {
   )
 }
 
-export default ModesDropdown
+export default withState(ModesDropdown)

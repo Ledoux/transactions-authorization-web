@@ -13,8 +13,8 @@ const DashboardPage = ({ api,
   description,
   DefaultDashboardComponent,
   firstName,
+  location: { query: { tutorialName } },
   onTutorialClick,
-  search,
   selectedMode,
   visibleModes
 }) => {
@@ -40,7 +40,7 @@ const DashboardPage = ({ api,
         </Portal>
       </div>
       {
-        selectedMode && search.tutorialName !== selectedMode.name && (
+        selectedMode && tutorialName !== selectedMode.name && (
           <Portal node={portalElement} >
             <Button className='button button--alive dashboard-page__button'
             onClick={onTutorialClick} >
